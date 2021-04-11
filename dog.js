@@ -11,6 +11,7 @@ Objekto savybes (parameters):
     - uodega: ruda
     - amzius: 3
 Objekto funkcionalumas (methods):
+    - prisistatyk
     - atsisesti
     - atsigulti
     - begti
@@ -19,10 +20,47 @@ Objekto funkcionalumas (methods):
 */
 
 class Dog {
-    constructor(vardas) {
-        console.log(vardas);
+    constructor(vardas, spalva) {
+        this.name = vardas;
+        this.fur = spalva;
+        this.barking = false;
+    }
+
+    prisistatymas() {
+        console.log(`Labas, as esu ${this.name} ir mano kailio spalva yra ${this.fur}.`);
+    }
+
+    balsas() {
+        if (this.barking) {
+            console.log(`${this.name}: loja...`);
+        } else {
+            console.log(`${this.name}: neloja...`);
+        }
+    }
+
+    balsas(arLoja) {
+        if (arLoja === undefined) {
+            console.log(`${this.name}: ${this.barking ? ' ' : 'ne'} loja`);
+            return;
+        }
+
+        if (typeof arLoja === 'boolean') {
+            this.barking = arLoja;
+            console.log(`${this.name}: ${this.barking ? ' ' : 'ne'} loja`);
+            return
+        }
     }
 }
 
-const rexas = new Dog('Rexas');
-console.log(rexas);
+const rexas = new Dog('Rexas', 'rudas');
+rexas.prisistatymas();
+
+const spaikas = new Dog('Spike', 'baltas');
+spaikas.prisistatymas();
+
+rexas.balsas();
+spaikas.balsas();
+rexas.barking = true;
+rexas.balsas();
+rexas.balsas(false);
+
